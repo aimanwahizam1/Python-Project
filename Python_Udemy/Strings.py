@@ -35,3 +35,4 @@ age = 24
 #Can write print("{name} is {age} years old".format(name=name, age=age))
 #or print("{} is {} years old".format(name, age))
 print(f"{name} is {age} years old")
+print(f"10/3 = {result:1.2f}")
