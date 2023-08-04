@@ -42,7 +42,7 @@ myNumbers = [1,2,3,4,5]
 filteredNumbers = list(filter(check_even,myNumbers))
 
 #returns numbers that gives TRUE in function
-print(f'{filteredNumbers = }')
+#print(f'{filteredNumbers = }')
 
 # ---------------------------------------------------------------------------- #
 #                                    Lambda                                    #
@@ -59,11 +59,12 @@ lambda num: num ** 2
 
 # Can combine map and lambda since it will be used once
 squaredMapLambda = list(map(lambda num: num ** 2, myNumbers))
-print(f'{squaredMapLambda}')
+#print(f'{squaredMapLambda}')
 
 # Can combine filter and lambda since it will be used once
 filteredLambda = list(filter(lambda num: num % 2 == 0, myNumbers))
-print(f'{filteredLambda = }')
+#print(f'{filteredLambda = }')
+
 
 
 
