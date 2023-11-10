@@ -6,6 +6,7 @@
 
 my_list = [1,2,3,4,5,6,7,8,9,10]
 
+# Example for loop
 """ for num in my_list:
     # Check for even
     if num % 2 == 0:
@@ -13,17 +14,20 @@ my_list = [1,2,3,4,5,6,7,8,9,10]
     else:
         print(f'Odd number: {num}') """
 
+
+# Example 2
 list_sum = 0
 
-for num in my_list:
+""" for num in my_list:
     list_sum += num
 
-#print(list_sum)
+print(list_sum) """
 
 # ---------------------------------- String ---------------------------------- #
 
 my_string = 'Hello World'
 
+# This prints individual letter
 """ for letter in my_string:
     print(letter) """
 
@@ -32,10 +36,17 @@ my_string = 'Hello World'
 #List of tuples
 my_tuple_list = [(1,2),(3,4),(5,6),(7,8)]
 
-#tuple impacting
+# Tuple impacting
 """ for a,b in my_tuple_list:
     print(a)
     print(b) """
+
+# Different examples of printing tuples using for loops
+""" for a in my_tuple_list:
+    print(a) """
+
+""" for a,b in my_tuple_list:
+    print(a) """
 
 # ------------------------------- Dictionaries ------------------------------- #
 
@@ -45,19 +56,18 @@ my_dict = {
     'k3': 3
 }
 
-#Returns keys
-for item in my_dict:
-    print(item)
+# Returns keys
+for key in my_dict:
+    print(key)
 
-#Returns items
+# Returns items
 for item in my_dict.items():
     print(item)
 
-#tuple impacting 
-for key,value in my_dict.items():
+# Tuple impacting in dictionary 
+for key, value in my_dict.items():
     print(key, value)
 
-#Return values
-
+# Return values
 for value in my_dict.values():
     print(value)
