@@ -2,41 +2,63 @@
 #                                    Strings                                   #
 # ---------------------------------------------------------------------------- #
 
+# Example String
 string = "hello"
 
-#####Slicing and indexing
-first_letter = string[0]
+# --------------------------- Slicing and Indexing --------------------------- #
 
-#This shows that you can use negative index to go from the back
-all_but_last_letter = string[:-1]
+first_letter = string[0]
 print(first_letter)
+
+# You can use negative index to go from the back
+all_but_last_letter = string[:-1]
 print(all_but_last_letter)
 
-#####.format()
+# ---------------------------------------------------------------------------- #
+#                                   Printing                                   #
+# ---------------------------------------------------------------------------- #
+
+# --------------------------------- .format() -------------------------------- #
+
+# Gives places where values will slot in in print statements
+
 print("The {} {} {}".format("fox", "brown", "quick"))
 
-#you can also make it .format ref the in the correct order
+# Make .format ref the in the correct order
 print("The {2} {1} {0}".format("fox", "brown", "quick"))
 
-#you can also use variables for .format
+# Use variables for .format
 print("The {q} {b} {f}".format(f="fox", b="brown", q="quick"))
 
-#you can also do this with variables
+# Using variables as inputs
 result = 10/3
 print("10/3 = {result}".format(result=result))
-#or
+
+# Or
 print("10/3 = {}".format(result))
 
-#you can also edit the number of decimals places used in .format => {value called:width.precision f}
-#width is how wide the result will be (normally 1)
-#precision is decimal places (rounded up if needs be)
+# NOTE: you can also edit the number of decimals places used in .format => {value called:width.precision f}
+# Width is how wide the result will be (normally 1)
+# Precision is decimal places (rounded up if needs be)
 print("10/3 to the nearest 2 decimal places is {result:1.2f}".format(result=result))
 
-#####fstrings
-#same as above but different way
+# --------------------------------- fstrings --------------------------------- #
+
+# Same as .format but different way (clearer)
 name = "Aiman"
 age = 24
-#Can write print("{name} is {age} years old".format(name=name, age=age))
-#or print("{} is {} years old".format(name, age))
+
+# NOTE: In .format...
+print("{name} is {age} years old".format(name=name, age=age))
+
+# Or 
+print("{} is {} years old".format(name, age))
+
+# NOTE: In fstring...
 print(f"{name} is {age} years old")
 print(f"10/3 = {result:1.2f}")
+
+# NOTE: For debugging its useful to do this:
+# (this gives variable name and value) 
+# (also works for lists and dictionaries)
+print(f'{name=}')
