@@ -2,7 +2,7 @@
 #                                  Question 1                                  #
 # ---------------------------------------------------------------------------- #
 
-#Use for, .split(), and if to create a Statement that will print out words that start with 's':
+# Use for, .split(), and if to create a Statement that will print out words that start with 's':
 st = 'Print only the words that start with s in this sentence'
 
 # --------------------------------- Solutions -------------------------------- #
@@ -18,7 +18,7 @@ print(s_words) """
 #                                  Question 2                                  #
 # ---------------------------------------------------------------------------- #
 
-#Use range() to print all the even numbers from 0 to 10.
+# Use range() to print all the even numbers from 0 to 10.
 
 # --------------------------------- Solution --------------------------------- #
 
@@ -29,7 +29,7 @@ print(even_numbers) """
 #                                  Question 3                                  #
 # ---------------------------------------------------------------------------- #
 
-#Use a List Comprehension to create a list of all numbers between 1 and 50 that are divisible by 3.
+# Use a List Comprehension to create a list of all numbers between 1 and 50 that are divisible by 3.
 
 # --------------------------------- Solution --------------------------------- #
 
@@ -40,7 +40,7 @@ print(numbers_divisible_3) """
 #                                  Question 4                                  #
 # ---------------------------------------------------------------------------- #
 
-#Go through the string below and and give a list of even length words"
+# Go through the string below and and give a list of even length words"
 st = 'Print every word in this sentence that has an even number of letters'
 
 # --------------------------------- Solution --------------------------------- #
@@ -77,7 +77,7 @@ print(numbers_list_output)
 #                                  Question 6                                  #
 # ---------------------------------------------------------------------------- #
 
-#Use List Comprehension to create a list of the first letters of every word in the string below:
+# Use List Comprehension to create a list of the first letters of every word in the string below:
 st = 'Create a list of the first letters of every word in this string'
 
 # --------------------------------- Solution --------------------------------- #
