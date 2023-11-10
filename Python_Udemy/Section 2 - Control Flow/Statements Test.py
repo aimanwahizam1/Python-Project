@@ -57,7 +57,7 @@ print(even_words) """
 
 # --------------------------------- Solution --------------------------------- #
 
-numbers_list = [number for number in range(0,101)]
+""" numbers_list = [number for number in range(0,101)]
 numbers_list_output =[]
 
 for number in numbers_list:
@@ -71,7 +71,7 @@ for number in numbers_list:
     else:
         numbers_list_output.append(number)
 
-print(numbers_list_output)
+print(numbers_list_output) """
 
 # ---------------------------------------------------------------------------- #
 #                                  Question 6                                  #
