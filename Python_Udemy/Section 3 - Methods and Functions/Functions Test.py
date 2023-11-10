@@ -79,7 +79,7 @@ def ispangram(str1, alphabet=string.ascii_lowercase):
 
 
 
-
+print(list(range(1,10,3)))
 
 
 
