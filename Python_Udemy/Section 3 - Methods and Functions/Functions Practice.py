@@ -232,7 +232,7 @@ print(spy_game([1,7,2,0,4,5,0])) """
 
 # COUNT PRIMES: Write a function that returns the number of prime numbers that exist up to and including a given number
 
-def count_prime(num):
+""" def count_prime(num):
     numbers = [number for number in range(2,num + 1)]
     counter = 0
     
@@ -243,21 +243,21 @@ def count_prime(num):
                     break
             else:
                 counter += 1
-    return counter
+    return counter """
 
-#print(count_prime(500))
+""" print(count_prime(500)) """
 
 # PRINT BIG: Write a function that takes in a single letter, and returns a 5x5 representation of that letter
 
-my_dict = {
+""" my_dict = {
     'A': '  *  \n * * \n*****\n*   *\n*   *',
     'B': '***  \n*  **\n***  \n*  **\n***  '
 }
 
 def print_big(letter):
     if letter.upper() in my_dict.keys():
-        return(my_dict[letter.upper()])
+        return(my_dict[letter.upper()]) """
         
-print(print_big('a'))
-print(print_big('b'))
+""" print(print_big('a'))
+print(print_big('b')) """
 
