@@ -186,8 +186,8 @@ def main(turn, board):
         game_over = play_again()
         print("Thanks for playing.")
         if not game_over:
-            new_turn, new_board = reset_game()
-            main(new_turn, new_board)
+            new_turn_counter, new_board = reset_game()
+            main(new_turn_counter, new_board)
 
 # ------------------------------- Calling Main ------------------------------- #
 
