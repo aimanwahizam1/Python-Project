@@ -11,8 +11,8 @@ class Line:
         self.coor2x, self.coor2y = coor2
     
     def distance(self):
-        x_displacement = self.coor2x-self.coor1x
-        y_displacement = self.coor2y-self.coor1y
+        x_displacement = self.coor2x - self.coor1x
+        y_displacement = self.coor2y - self.coor1y
 
         return (((x_displacement)**2) + ((y_displacement)**2))**0.5
     
