@@ -21,11 +21,11 @@ TypeError: unsupported operand type(s) for ** or pow(): 'str' and 'int' """
 
 # --------------------------------- Answer 1 --------------------------------- #
 
-""" for i in ["a", "b", "c"]:
-    try:
-        print(i*2)
-    except TypeError:
-        print("TypeError!") """
+""" try:
+    for i in ["a", "b", "c"]:
+        print(i*2)  
+except TypeError:
+    print("TypeError!") """
 
 # ---------------------------------------------------------------------------- #
 #                                   Problem 2                                  #
@@ -67,7 +67,7 @@ finally:
 # Write a function that asks for an integer and prints the square of it. 
 # Use a while loop with a try, except, else block to account for incorrect inputs.
 
-""" def ask():
+def ask():
     while True:
         try:
             number = int(input("Input an integer:"))
@@ -75,7 +75,8 @@ finally:
             print("An error occurred! Please try again!")
             continue
         else:
-            print("Thank you, your number squared is: ", number**2)
             break
+    
+    print("Thank you, your number squared is: ", number**2)
 
-ask() """
+ask()
