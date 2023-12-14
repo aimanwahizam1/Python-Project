@@ -86,7 +86,7 @@ def place_symbol(player_one, player_two, turn, board):
 
 # ---------------------------- Win Condition Check --------------------------- #
 
-def check_win(is_game_over, board):
+def check_win(is_game_over, board, turn_number):
 
     # Check rows
     for i in range(1, 10, 3):
@@ -102,11 +102,11 @@ def check_win(is_game_over, board):
     
     # Check diagonals
     if board[1] == board[5] == board[9] != " " or board[3] == board[5] == board[7] != " ":
-            print("Game Over.")
-            is_game_over = True
+        print("Game Over.")
+        is_game_over = True
 
     if is_game_over:
-        if turn_counter % 2 == 0:
+        if turn_number % 2 == 0:
             print("Player One has won!")
         else:
             print("Player Two has won!")
@@ -141,8 +141,7 @@ def play_again():
     if play_again_choice.upper() == "Y":
         print("Playing Again...")
         return False
-    else:
-        return True
+    return True
 
 # -------------------------------- Reset Game -------------------------------- #
 
@@ -178,7 +177,7 @@ def main(turn, board):
     while not game_over:
         place_symbol(player_one_symbol,player_two_symbol, turn, board)
         display_board(board)
-        game_over = check_win(game_over, board)
+        game_over = check_win(game_over, board, turn_counter)
         turn += 1
         game_over = check_draw(turn, game_over)
 
