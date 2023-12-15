@@ -3,7 +3,7 @@ b = 2
 
 print(a)
 # Deliberately making a mistake by using capital B
-print(B)
+""" print(B) """
 
 # To test this script:
     # In terminal navigate to this director
