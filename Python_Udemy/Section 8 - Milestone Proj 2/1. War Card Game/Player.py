@@ -8,7 +8,6 @@ Player will be able to:
 - Remove cards from hand
 - Gain either single or multiple cards to hand
 """
-import Deck
 
 class Player():
     def __init__(self, name) -> None:
