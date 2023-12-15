@@ -36,9 +36,3 @@ class Card():
     def __str__(self) -> str:
         return self.value + " of " + self.suit
     
-# Example testing
-""" two_hearts = Card("Hearts", "Two")
-print(two_hearts)
-print(two_hearts.suit)
-print(two_hearts.value)
-print(two_hearts.rank) """

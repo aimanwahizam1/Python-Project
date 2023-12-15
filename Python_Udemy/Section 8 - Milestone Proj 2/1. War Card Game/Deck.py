@@ -21,13 +21,4 @@ class Deck():
 
     def deal_one_card(self):
         return self.all_cards.pop()
-
-# Example testing
-""" new_deck = Deck()
-print(new_deck.all_cards[0])
-print("\nShuffled:")
-new_deck.shuffle()
-print(new_deck.all_cards[0])
-dealt_card = new_deck.deal_one_card()
-print(dealt_card)
-print(len(new_deck.all_cards)) """
+    
