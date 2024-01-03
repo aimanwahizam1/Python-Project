@@ -9,7 +9,11 @@ class Dealer(Player):
         return f"FACE DOWN, {str(self.hand[-1])}"
 
     def print_initial_hand(self) -> str:
-        print(f'\n{self.name}:\nHand: {self.show_initial_hand()}\n')
+        print(f'{self.name}:\nHand: {self.show_initial_hand()}\n')
+
+    def calculate_initial_hand_value(self):
+        for card in self.hand:
+            self.hand_value += card.rank
 
     def print_player_status(self) -> str:
         cards = list(map(str, self.hand))
@@ -18,4 +22,4 @@ class Dealer(Player):
         print(f'Hand: {cards}')
         self.calculate_initial_hand_value()
         print(f'Hand Value: {self.hand_value}')
-        print('------------')
+        print('------------\n')

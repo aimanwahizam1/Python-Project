@@ -71,7 +71,6 @@ while not game_over:
 
 if (dealer.hand_value >= player_one.hand_value and dealer.hand_value < 21) or player_one.hand_value > 21:
     print("Dealer Wins!")
-elif (player_one.hand_value < 21 and player_one.hand_value > dealer.hand_value) or (player_one.hand_value < 21 and dealer.hand_value > 21):
+elif player_one.hand_value < 21 and (player_one.hand_value > dealer.hand_value or dealer.hand_value > 21):
     print(f'Player {player_one.name} Wins!')
     player_one.add_winnings(player_one.bet * 2)
-    

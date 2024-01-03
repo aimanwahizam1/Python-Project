@@ -23,7 +23,7 @@ value_rank_map = {
     "Jack": 10,
     "Queen": 10,
     "King": 10,
-    "Ace": 12
+    "Ace": 11
 }
 
 suits = ("Hearts", "Diamonds", "Spades", "Clubs")
