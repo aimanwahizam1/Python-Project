@@ -50,6 +50,7 @@ class Player():
     def place_bet(self):
         while True:
             try:
+                print('------------')
                 print(f'Your current bank is {self.bank}.')
                 bet = int(input("Place a bet: "))
 
@@ -59,6 +60,7 @@ class Player():
             except ValueError:
                 print("Please input a number.")
             else:
+                print('------------')
                 print(f'You have bet {bet}.\n')
                 self.bank -= bet
                 self.bet = bet
@@ -73,6 +75,7 @@ class Player():
     def print_player_status(self) -> str:
         cards = list(map(str, self.hand))
 
+        print('------------')
         print(f'Player: {self.name}')
         print(f'Hand: {cards}')
         print(f'Bank: {self.bank}')
