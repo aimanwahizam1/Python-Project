@@ -3,6 +3,55 @@ from Player import Player
 from Dealer import Dealer
 
 # -------------------------------- Game Setup -------------------------------- #
+
+def initiate_players():
+    print("Welcome to BlackJack!\n")
+    number_of_players = 0
+    players = []
+    
+    while True:
+        try:
+            number_of_players = int(input("How many players are joining us at the table? "))
+        except ValueError:
+            print("Please input a number.")
+            continue
+        else:
+            print(f"\nThe number of players are {number_of_players}.")
+            break
+        
+    for i in range(number_of_players):
+        player_name = ""
+        player_bank = 0
+
+        while True:
+            print(f"\nWelcome Player {i+1}.")
+            player_name = input("What is your name? ")
+
+            if len(player_name) == 0:
+                print("Please input a name.")
+                continue
+            else:
+                print(f"\nWelcome {player_name}")
+                break
+
+        while True:
+            try:
+                player_bank = int(input("How much do you want to buy in? "))
+            except ValueError:
+                print("Please input a number.")
+                continue
+            except player_bank == 0:
+                print("Error. Cannot bank in 0.")
+                continue
+            else:
+                print(f"\n{player_name} has an initial bank of {player_bank}.")
+                break
+        
+        players.append(Player(player_name,player_bank))
+
+    return players
+
+
 game_over = False
 player_one = Player("One", 100)
 dealer = Dealer()
