@@ -2,7 +2,9 @@ from Deck import Deck
 from Player import Player
 from Dealer import Dealer
 
-# ------------------------------ Game Functions ------------------------------ #
+# ---------------------------------------------------------------------------- #
+#                                Game Functions                                #
+# ---------------------------------------------------------------------------- #
 
 def initiate_players() -> list[Player]:
     number_of_players = 0
@@ -29,18 +31,18 @@ def initiate_players() -> list[Player]:
             if len(player_name) == 0:
                 print("Please input a name.")
                 continue
-            else:
-                print(f"\nWelcome {player_name}")
-                break
+
+            print(f"\nWelcome {player_name}")
+            break
 
         while True:
             try:
                 player_bank = int(input("How much do you want to buy in? "))
+                if player_bank <= 0:
+                    print("Error. Please input a valid number.")
+                    continue                    
             except ValueError:
                 print("Please input a number.")
-                continue
-            except player_bank <= 0:
-                print("Error. Please input a valid number.")
                 continue
             else:
                 print(f"\n{player_name} has an initial bank of {player_bank}.")
@@ -51,14 +53,14 @@ def initiate_players() -> list[Player]:
 
     return players
 
-def dealer_setup():
+def dealer_setup(deck: Deck):
     dealer = Dealer()
     dealer.get_initial_hand(deck.deal_two_cards())
     dealer.print_initial_hand()
 
     return dealer
 
-def player_turn(player):
+def player_turn(player: Player):
     print('\n------------')
     print(f"{player.name}'s Turn.")
     print('------------\n')
@@ -72,7 +74,7 @@ def player_turn(player):
         player_move = input("Do you want to Hit or Stay? ")
         if player_move.lower() not in ["hit", "stay"]:
             continue
-        elif player_move.lower() == "hit":
+        if player_move.lower() == "hit":
             dealt_card = deck.deal_one_card()
             print(f'\nYou got: {str(dealt_card)}\n')
 
@@ -90,7 +92,7 @@ def player_turn(player):
         else:
             break
 
-def dealer_turn(dealer):
+def dealer_turn(dealer: Dealer):
     print("\nDealer's Turn")
 
     dealer.print_player_status(initial=True)
@@ -108,7 +110,16 @@ def dealer_turn(dealer):
         dealer.hit(dealt_card)
         dealer.print_player_status()
 
-def play_again(players):
+def check_hands(player: Player, dealer: Dealer):
+    if player.hand_value < 21 and (dealer.hand_value > 21 or player.hand_value > dealer.hand_value):
+        player.add_winnings(player.bet * 2)
+    elif player.hand_value > 21 or (21 > dealer.hand_value >= player.hand_value):
+        print(f"Dealer wins compared versus {player.name}.")
+        print(f"{player.name} has lost {player.bet}")
+        print(f"{player.name}'s bank is now {player.bank}")
+    print('------------')
+
+def play_again(players) -> list[Player]:
     updated_players = players.copy()
 
     for player in players:
@@ -119,7 +130,7 @@ def play_again(players):
                 if play_again.lower() not in ["yes", "no"]:
                     print("Please input either Yes or No.")
                     continue
-                elif play_again.lower() == "yes":
+                if play_again.lower() == "yes":
                     if player.bank == 0:
                         print("You currently do not have any banked money.")
                         print("To play again, you need to buy in again.")
@@ -128,7 +139,7 @@ def play_again(players):
                             if play_again_second.lower() not in ["yes", "no"]:
                                 print("Please input either Yes or No.")
                                 continue
-                            elif play_again_second.lower() == "yes":
+                            if play_again_second.lower() == "yes":
                                 try:
                                     buy_in = int(input("How much do you want to buy in? "))
                                     if buy_in <= 0:
@@ -144,6 +155,7 @@ def play_again(players):
                                     is_break = True
                                     break
                             else:
+                                is_break = True
                                 break
                         if is_break:
                             break
@@ -154,22 +166,19 @@ def play_again(players):
                     print("Thanks for playing Blackjack.")
                     updated_players.remove(player)
                     break
+    
+    if updated_players:
+        for player in updated_players:
+            player.hand = []
+            player.bet = 0
+            player.hand_value = 0
 
     return updated_players
 
-# ------------------------------ Game Execution ------------------------------ #
-if __name__ == "__main__":
-    # -------------------------------- Game Setup -------------------------------- #
-    print("Welcome to BlackJack!")
-    print('------------\n')
-    players = initiate_players()
-
-    deck = Deck()
-    deck.shuffle()
-
+def blackjack(players: list[Player], deck: Deck):
     # ------------------------------- Dealer Setup ------------------------------- #
-    dealer = dealer_setup()
-
+    dealer = dealer_setup(deck)
+    
     # --------------------------------- Gameplay --------------------------------- #
     for player in players:
         player.get_initial_hand(deck.deal_two_cards())
@@ -182,16 +191,25 @@ if __name__ == "__main__":
 
     # --------------------------------- Game End --------------------------------- #
     for player in players:
-        if player.hand_value < 21 and (dealer.hand_value > 21 or player.hand_value > dealer.hand_value):
-            player.add_winnings(player.bet * 2)
-        elif player.hand_value > 21 or (dealer.hand_value >= player.hand_value and dealer.hand_value < 21):
-            print(f"Dealer wins compared versus {player.name}.")
-            print(f"{player.name} has lost {player.bet}")
-            print(f"{player.name}'s bank is now {player.bank}")
-        print('------------')
+        check_hands(player, dealer)
 
-    # -------------------------------- Game Replay ------------------------------- #
-    play_again(players)
+# ---------------------------------------------------------------------------- #
+#                                Game Execution                                #
+# ---------------------------------------------------------------------------- #
+if __name__ == "__main__":
+    # -------------------------------- Game Setup -------------------------------- #
+    print("Welcome to BlackJack!")
+    print('------------\n')
+    players = initiate_players()
 
+    # --------------------------------- Gameplay --------------------------------- #
+    while players:
+        deck = Deck()
+        deck.shuffle()
+        blackjack(players, deck)
 
+        # -------------------------------- Game Replay ------------------------------- #
+        players = play_again(players)
+    
+    print("The table is now closed. Thank you come again.")
     
