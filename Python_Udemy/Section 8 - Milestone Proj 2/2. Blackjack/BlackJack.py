@@ -39,8 +39,8 @@ def initiate_players() -> list[Player]:
             except ValueError:
                 print("Please input a number.")
                 continue
-            except player_bank == 0:
-                print("Error. Cannot bank in 0.")
+            except player_bank <= 0:
+                print("Error. Please input a valid number.")
                 continue
             else:
                 print(f"\n{player_name} has an initial bank of {player_bank}.")
@@ -114,7 +114,6 @@ if __name__ == "__main__":
     print("Welcome to BlackJack!")
     print('------------\n')
     players = initiate_players()
-    print(type(players))
 
     deck = Deck()
     deck.shuffle()
@@ -141,5 +140,52 @@ if __name__ == "__main__":
             print(f"{player.name} has lost {player.bet}")
             print(f"{player.name}'s bank is now {player.bank}")
         print('------------')
+
+    # -------------------------------- Game Replay ------------------------------- #
+    is_break = False
+    
+    for player in players:
+        if not is_break:
+            while True:
+                play_again = input(f"{player.name} do you want to play another hand? Yes or No. ")
+                if play_again.lower() not in ["yes", "no"]:
+                    print("Please input either Yes or No.")
+                    continue
+                elif play_again.lower() == "yes":
+                    if player.bank == 0:
+                        print("You currently do not have any banked money.")
+                        print("To play again, you need to buy in again.")
+                        while True:
+                            play_again_second = input("Do you want to buy in? Yes or No. ")
+                            if play_again_second.lower() not in ["yes", "no"]:
+                                print("Please input either Yes or No.")
+                                continue
+                            elif play_again_second.lower() == "yes":
+                                try:
+                                    buy_in = int(input("How much do you want to buy in? "))
+                                    if buy_in <= 0:
+                                        print("Error. Please input a valid number greater than 0.")
+                                        continue
+                                except ValueError:
+                                    print("Please input a number.")
+                                    continue
+                                else:
+                                    print("Thank you for playing again.")
+                                    player.bank += buy_in
+                                    print(f"You now have {player.bank}.")
+                                    is_break = True
+                                    break
+                            else:
+                                break
+                        if is_break:
+                            break
+                    else:
+                        print(f'{player.name} is staying on for another hand!')
+                        break
+                else:
+                    print("Thanks for playing Blackjack.")
+                    players.remove(player)
+                    break
+
 
     
