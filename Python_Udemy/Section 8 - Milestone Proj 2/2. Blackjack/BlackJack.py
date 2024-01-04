@@ -2,9 +2,9 @@ from Deck import Deck
 from Player import Player
 from Dealer import Dealer
 
-# -------------------------------- Game Setup -------------------------------- #
+# ------------------------------ Game Functions ------------------------------ #
 
-def initiate_players():
+def initiate_players() -> list[Player]:
     number_of_players = 0
     players = []
     
@@ -51,84 +51,86 @@ def initiate_players():
 
     return players
 
+def dealer_setup():
+    dealer = Dealer()
+    dealer.get_initial_hand(deck.deal_two_cards())
+    dealer.print_initial_hand()
+
+    return dealer
+
+def player_turn(player):
+    print('\n------------')
+    print(f"{player.name}'s Turn.")
+    print('------------\n')
+
+    player.print_player_status()
+
+    player.place_bet()
+    player.print_player_status()    
+
+    while True:
+        player_move = input("Do you want to Hit or Stay? ")
+        if player_move.lower() not in ["hit", "stay"]:
+            continue
+        elif player_move.lower() == "hit":
+            dealt_card = deck.deal_one_card()
+            print(f'\nYou got: {str(dealt_card)}\n')
+
+            if dealt_card.value == "Ace":
+                player.choose_ace_value(dealt_card)
+            else:
+                player.hand_value += dealt_card.rank
+        
+            player.hit(dealt_card)
+            player.print_player_status()
+
+            if player.hand_value > 21:
+                print("BUST!")
+                break
+        else:
+            break
+
+def dealer_turn(dealer):
+    print("\nDealer's Turn")
+
+    dealer.print_player_status(initial=True)
+
+    while dealer.hand_value < 17:
+        dealt_card = deck.deal_one_card()
+
+        if dealt_card.value == "Ace":
+            if dealer.hand_value + 11 > 21:
+                dealer.hand_value += 1
+            else:
+                dealer.hand_value += 11
+        else:
+            dealer.hand_value += dealt_card.rank
+        dealer.hit(dealt_card)
+        dealer.print_player_status()
+
+# ------------------------------ Game Execution ------------------------------ #
 if __name__ == "__main__":
     # -------------------------------- Game Setup -------------------------------- #
     print("Welcome to BlackJack!")
     print('------------\n')
     players = initiate_players()
-    busted_players = 0
+    print(type(players))
 
-    players_turn = True
     deck = Deck()
     deck.shuffle()
 
     # ------------------------------- Dealer Setup ------------------------------- #
-    dealer = Dealer()
-    dealer.get_initial_hand(deck.deal_two_cards())
-    dealer.print_initial_hand()
+    dealer = dealer_setup()
 
     # --------------------------------- Gameplay --------------------------------- #
     for player in players:
         player.get_initial_hand(deck.deal_two_cards())
 
     for player in players:
-
-        print('\n------------')
-        print(f"{player.name}'s Turn.")
-        print('------------\n')
-
-        player.print_player_status()
-
-        player.place_bet()
-        player.print_player_status()    
-
-        while True:
-            player_move = input("Do you want to Hit or Stay? ")
-            if player_move.lower() not in ["hit", "stay"]:
-                continue
-            elif player_move.lower() == "hit":
-                dealt_card = deck.deal_one_card()
-                print(f'\nYou got: {str(dealt_card)}\n')
-
-                if dealt_card.value == "Ace":
-                    player.choose_ace_value(dealt_card)
-                else:
-                    player.hand_value += dealt_card.rank
-            
-                player.hit(dealt_card)
-                player.print_player_status()
-
-                if player.hand_value > 21:
-                    print("BUST!")
-                    turn_over = True
-                    busted_players += 1
-                    break
-            else:
-                turn_over = True
-                break
+        player_turn(player)
 
     # -------------------------------- Dealer Turn ------------------------------- #
-    if busted_players == len(players):
-        print("All players are busted.")
-        print("Dealer wins!")
-
-    else:
-        print("\nDealer's Turn")
-
-        dealer.print_player_status(initial=True)
-
-        while dealer.hand_value < 17:
-            dealt_card = deck.deal_one_card()
-
-            if dealt_card.value == "Ace":
-                if dealer.hand_value + 11 > 21:
-                    dealer.hand_value += 1
-                else:
-                    dealer.hand_value += 11
-            else:
-                dealer.hand_value += dealt_card.rank
-            dealer.hit(dealt_card)
-            dealer.print_player_status()
+    dealer_turn(dealer)
 
     # --------------------------------- Game End --------------------------------- #
     for player in players:
