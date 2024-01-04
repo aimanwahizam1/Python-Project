@@ -108,43 +108,11 @@ def dealer_turn(dealer):
         dealer.hit(dealt_card)
         dealer.print_player_status()
 
-# ------------------------------ Game Execution ------------------------------ #
-if __name__ == "__main__":
-    # -------------------------------- Game Setup -------------------------------- #
-    print("Welcome to BlackJack!")
-    print('------------\n')
-    players = initiate_players()
-
-    deck = Deck()
-    deck.shuffle()
-
-    # ------------------------------- Dealer Setup ------------------------------- #
-    dealer = dealer_setup()
-
-    # --------------------------------- Gameplay --------------------------------- #
-    for player in players:
-        player.get_initial_hand(deck.deal_two_cards())
+def play_again(players):
+    updated_players = players.copy()
 
     for player in players:
-        player_turn(player)
-
-    # -------------------------------- Dealer Turn ------------------------------- #
-    dealer_turn(dealer)
-
-    # --------------------------------- Game End --------------------------------- #
-    for player in players:
-        if player.hand_value < 21 and (dealer.hand_value > 21 or player.hand_value > dealer.hand_value):
-            player.add_winnings(player.bet * 2)
-        elif player.hand_value > 21 or (dealer.hand_value >= player.hand_value and dealer.hand_value < 21):
-            print(f"Dealer wins compared versus {player.name}.")
-            print(f"{player.name} has lost {player.bet}")
-            print(f"{player.name}'s bank is now {player.bank}")
-        print('------------')
-
-    # -------------------------------- Game Replay ------------------------------- #
-    is_break = False
-    
-    for player in players:
+        is_break = False
         if not is_break:
             while True:
                 play_again = input(f"{player.name} do you want to play another hand? Yes or No. ")
@@ -184,8 +152,46 @@ if __name__ == "__main__":
                         break
                 else:
                     print("Thanks for playing Blackjack.")
-                    players.remove(player)
+                    updated_players.remove(player)
                     break
+
+    return updated_players
+
+# ------------------------------ Game Execution ------------------------------ #
+if __name__ == "__main__":
+    # -------------------------------- Game Setup -------------------------------- #
+    print("Welcome to BlackJack!")
+    print('------------\n')
+    players = initiate_players()
+
+    deck = Deck()
+    deck.shuffle()
+
+    # ------------------------------- Dealer Setup ------------------------------- #
+    dealer = dealer_setup()
+
+    # --------------------------------- Gameplay --------------------------------- #
+    for player in players:
+        player.get_initial_hand(deck.deal_two_cards())
+
+    for player in players:
+        player_turn(player)
+
+    # -------------------------------- Dealer Turn ------------------------------- #
+    dealer_turn(dealer)
+
+    # --------------------------------- Game End --------------------------------- #
+    for player in players:
+        if player.hand_value < 21 and (dealer.hand_value > 21 or player.hand_value > dealer.hand_value):
+            player.add_winnings(player.bet * 2)
+        elif player.hand_value > 21 or (dealer.hand_value >= player.hand_value and dealer.hand_value < 21):
+            print(f"Dealer wins compared versus {player.name}.")
+            print(f"{player.name} has lost {player.bet}")
+            print(f"{player.name}'s bank is now {player.bank}")
+        print('------------')
+
+    # -------------------------------- Game Replay ------------------------------- #
+    play_again(players)
 
 
     
