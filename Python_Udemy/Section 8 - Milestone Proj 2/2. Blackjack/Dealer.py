@@ -15,11 +15,12 @@ class Dealer(Player):
         for card in self.hand:
             self.hand_value += card.rank
 
-    def print_player_status(self) -> str:
+    def print_player_status(self, initial=False) -> str:
         cards = list(map(str, self.hand))
 
         print(f'{self.name}:')
         print(f'Hand: {cards}')
-        self.calculate_initial_hand_value()
+        if initial:
+            self.calculate_initial_hand_value()
         print(f'Hand Value: {self.hand_value}')
         print('------------\n')

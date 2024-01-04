@@ -68,8 +68,8 @@ class Player():
 
     def add_winnings(self, winnings):
         self.bank += winnings
-        self.bet = 0
-        print(f'Congratulations. You have won {winnings}. Your new bank balance is {self.bank}.')
+        print(f'Congratulations {self.name}! You have won {winnings} from a bet of {self.bet}.')
+        print(f'Your new bank balance is {self.bank}.')
 
 
     def print_player_status(self) -> str:
