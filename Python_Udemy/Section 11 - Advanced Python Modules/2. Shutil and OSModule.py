@@ -40,5 +40,6 @@ for folder, sub_folders, files in os.walk("c:/Users/aiman/Python Project/Python_
     print("The files are: ")
     for f in files:
         print(f"\t File: {f}")
+
     print("\n")
     
